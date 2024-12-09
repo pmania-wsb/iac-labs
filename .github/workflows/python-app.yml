@@ -34,8 +34,6 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install --no-root
-        poetry run task local
-        http://localhost:5000
         poetry run task test
         poetry run task lint
         poetry run task formatter
