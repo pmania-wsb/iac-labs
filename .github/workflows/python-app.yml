@@ -48,6 +48,13 @@ jobs:
   lint:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./example-app
     needs: build
     concurrency: 
       group: lint
@@ -68,6 +75,13 @@ jobs:
   formatter:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./example-app
     needs: build
     concurrency: 
       group: formatter
@@ -88,6 +102,13 @@ jobs:
   security:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./example-app
     needs: build
     concurrency: 
       group: security
@@ -121,6 +142,13 @@ jobs:
   unittests:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./example-app
     needs: [lint, formatter, security]
     steps:
     - name: Recover cached dependencies
