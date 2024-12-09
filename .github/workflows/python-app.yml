@@ -36,7 +36,6 @@ jobs:
       uses: snok/install-poetry@v1.3.4
     - name: Install dependencies
     - run: |
-        poetry debug info
         poetry install --no-root
         poetry run task local
         http://localhost:5000
