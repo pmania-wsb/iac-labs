@@ -14,11 +14,14 @@ permissions:
 
 jobs:
   build:
-
+    
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     defaults:
       run:
+        shell: bash
         working-directory: ./example-app
 
     steps:
@@ -45,8 +48,12 @@ jobs:
   lint:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     defaults:
       run:
+        shell: bash
         working-directory: ./example-app
     needs: build
     concurrency: 
@@ -79,8 +86,12 @@ jobs:
   formatter:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     defaults:
       run:
+        shell: bash
         working-directory: ./example-app
     needs: build
     concurrency: 
@@ -113,8 +124,12 @@ jobs:
   security:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     defaults:
       run:
+        shell: bash
         working-directory: ./example-app
     needs: build
     concurrency: 
@@ -149,8 +164,12 @@ jobs:
   unittests:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     defaults:
       run:
+        shell: bash
         working-directory: ./example-app
     needs: [lint, formatter, security]
     concurrency: static-tests
