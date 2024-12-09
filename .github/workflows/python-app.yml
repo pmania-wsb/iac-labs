@@ -41,42 +41,6 @@ jobs:
       with:
         path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
         key: ${{ runner.os }}-venv
-  
-  
-  formatter:
-
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./example-app
-    needs: build
-    concurrency: 
-      group: static
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.13
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.13"
-        
-    - name: Install Poetry Action
-      uses: snok/install-poetry@v1.3.4
-      
-    - name: Install dependencies
-      run: |
-        poetry install --no-root
-        
-    - name: Recover cached dependencies
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
-        key: ${{ runner.os }}-venv
-        
-    - name: Formatter
-      run: | 
-        poetry run task formatter
-
     
   security:
 
@@ -111,6 +75,41 @@ jobs:
     - name: Formatter
       run: |
         poetry run task security
+
+    
+  formatter:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./example-app
+    needs: build
+    concurrency: 
+      group: static
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.13"
+        
+    - name: Install Poetry Action
+      uses: snok/install-poetry@v1.3.4
+      
+    - name: Install dependencies
+      run: |
+        poetry install --no-root
+        
+    - name: Recover cached dependencies
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: /home/runner/work/iac-labs/iac-labs/example-app/.venv
+        key: ${{ runner.os }}-venv
+        
+    - name: Formatter
+      run: | 
+        poetry run task formatter
 
   lint:
 
