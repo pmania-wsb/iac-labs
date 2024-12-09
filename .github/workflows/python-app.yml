@@ -50,7 +50,7 @@ jobs:
         working-directory: ./example-app
     needs: build
     concurrency: 
-      group: static-tests
+      group: static-tests-${{ github.ref }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.13
@@ -84,7 +84,7 @@ jobs:
         working-directory: ./example-app
     needs: build
     concurrency: 
-      group: static-tests
+      group: static-tests-${{ github.ref }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.13
@@ -118,7 +118,7 @@ jobs:
         working-directory: ./example-app
     needs: build
     concurrency: 
-      group: static-tests
+      group: static-tests-${{ github.ref }}
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python 3.13
